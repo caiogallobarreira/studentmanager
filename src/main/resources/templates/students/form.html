@@ -15,9 +15,9 @@
         <div class="nav-wrapper">
             <a href="#" class="brand-logo">StudentManager</a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li class="active"><a href="/task">pendentes</a></li>
-                <li><a href="#">concluídas</a></li>
-                <li><a href="#">usuários</a></li>
+                <li><a href="/">home</a></li>
+                <li class="active"><a href="/students">alunos</a></li>
+                <li><a href="/logout">logout</a></li>
             </ul>
         </div>
     </nav>
@@ -26,7 +26,7 @@
         <h2>Cadastrar Aluno</h2>
 
         <div class="card">
-            <form action="/students" method="post" th:object="${students}">
+            <form th:action="${'/students'}" method="post" th:object="${students}">
                 <div class="card-content">
                     <div class="input-field">
                         <input th:field="*{nome}" type="text" th:class="${(#fields.hasErrors('nome')) ? 'invalid' : ''}">
