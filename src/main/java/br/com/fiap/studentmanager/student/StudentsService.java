@@ -21,4 +21,8 @@ public class StudentsService {
         studentRepository.deleteById(id);
         return true;
     }
+
+    public void create(Students student) {
+        studentRepository.save(student);
+    }
 }

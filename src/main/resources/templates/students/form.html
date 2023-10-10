@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <title>StudentManager</title>
+</head>
+
+<body class="grey lighten-2">
+    <nav>
+        <div class="nav-wrapper">
+            <a href="#" class="brand-logo">StudentManager</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li class="active"><a href="/task">pendentes</a></li>
+                <li><a href="#">concluídas</a></li>
+                <li><a href="#">usuários</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        <h2>Cadastrar Aluno</h2>
+
+        <div class="card">
+            <form action="/students" method="post" th:object="${students}">
+                <div class="card-content">
+                    <div class="input-field">
+                        <input th:field="*{nome}" type="text" th:class="${(#fields.hasErrors('nome')) ? 'invalid' : ''}">
+                        <label for="nome">Nome</label>
+                        <span th:errors="*{nome}" class="helper-text red-text"></span>
+                    </div>
+                    <div class="input-field">
+                        <input th:field="*{email}" type="email" th:class="${(#fields.hasErrors('nome')) ? 'invalid' : ''}">
+                        <label for="email">E-mail</label>
+                        <span th:errors="*{email}" class="helper-text red-text"></span>
+                    </div>
+                    <div class="input-field">
+                        <input th:field="*{dataNascimento}" type="date" th:class="${(#fields.hasErrors('nome')) ? 'invalid' : ''}">
+                        <label for="dataNascimento">Data de Nascimento</label>
+                        <span th:errors="*{dataNascimento}" class="helper-text red-text"></span>
+                    </div>
+                </div>
+                <div class="card-action right-align">
+                    <a href="/students">CANCELAR</a>
+                    <button class="btn waves-effect waves-light" type="submit" name="action">SALVAR
+                        <i class="material-icons right">send</i>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </main>
+</body>
+</html>

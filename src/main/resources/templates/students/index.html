@@ -22,7 +22,7 @@
     </nav>
 
     <main class="container">
-        <div class="card-panel teal" th:if="${success}" th:text="${success}"></div>
+        <div class="card-panel teal white-text" th:if="${success}" th:text="${success}"></div>
         <div class="card-panel red white-text" th:if="${error}" th:text="${error}"></div>
 
         <h2>Tarefas Pendentes</h2>
@@ -33,10 +33,10 @@
                     <div class="card-content">
                         <span class="card-title" th:text="${student.nome}"></span>
                         <p th:text="${student.email}"></p>
-                        <span class="badge blue white-text" th:text="${student.status == 1 ? 'Ativo' : 'Inativo'}"></span>
+                        <span class="badge blue white-text" th:text="${student.status == TRUE ? 'Ativo' : 'Inativo'}"></span>
                     </div>
                     <div class="card-action">
-                        <a th:href="${'/student/delete/' + student.id}" class="btn red">
+                        <a th:href="${'/students/delete/' + student.id}" class="btn red">
                             <i class="material-icons">delete</i>
                         </a>
                     </div>
@@ -47,6 +47,11 @@
 
     </main>
 
+    <div class="fixed-action-btn">
+        <a href="students/new" class="btn-floating btn-large red">
+          <i class="large material-icons">add</i>
+        </a>
+    </div>
 
 </body>
 </html>

@@ -2,6 +2,7 @@ package br.com.fiap.studentmanager.student;
 
 import java.util.Calendar;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -26,9 +27,9 @@ public class Students {
     @NotBlank @Email
     String email;
 
-    @Past
-    Calendar dataNascimento;
+    @NotBlank
+    String dataNascimento;
 
-    @NotNull
-    Integer status;
+    @Column(columnDefinition = "boolean default true")
+    Boolean status;
 }
