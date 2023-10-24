@@ -3,6 +3,10 @@ package br.com.fiap.studentmanager.student;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,19 +25,23 @@ public class StudentsController {
     @Autowired
     StudentsService studentService;
 
+    @Autowired
+    MessageSource message;
+
     @GetMapping
-    public String index(Model model) {
-        List<Students> students = studentService.findAll();
-        model.addAttribute("students", students);
+    public String index(Model model, @AuthenticationPrincipal OAuth2User user) {
+        model.addAttribute("username", user.getAttribute("name"));
+        model.addAttribute("avatar_url", user.getAttribute("avatar_url"));
+        model.addAttribute("students", studentService.findAll());
         return "students/index";
     }
 
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable Long id, RedirectAttributes redirect) {
         if (studentService.delete(id)) {
-            redirect.addFlashAttribute("success", "Aluno removido com sucesso");
+            redirect.addFlashAttribute("success", getMessage("students.delete.success"));
         } else {
-            redirect.addFlashAttribute("error", "Aluno não encontrado");
+            redirect.addFlashAttribute("error", getMessage("students.notfound"));
         }
         return "redirect:/students";
     }
@@ -47,8 +55,11 @@ public class StudentsController {
     public String create(@Valid Students student, BindingResult result, RedirectAttributes redirect) {
         if (result.hasErrors()) return "students/form";
         studentService.create(student);
-        redirect.addFlashAttribute("success", "Aluno cadastrado com sucesso");
+        redirect.addFlashAttribute("success", getMessage("students.create.success"));
         return "redirect:/students";
     }
 
+    private String getMessage(String code){
+        return message.getMessage(code, null, LocaleContextHolder.getLocale());
+    }
 }

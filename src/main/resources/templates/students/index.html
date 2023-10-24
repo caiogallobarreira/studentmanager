@@ -4,8 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="style.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <title>StudentManager</title>
 </head>
 
@@ -14,11 +16,19 @@
         <div class="nav-wrapper">
             <a href="#" class="brand-logo">StudentManager</a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <ul id="nav-mobile" class="right hide-on-med-and-down">
-                    <li><a href="/">home</a></li>
-                    <li class="active"><a href="/students">alunos</a></li>
-                    <li><a href="/logout">logout</a></li>
-                </ul>
+                <li class="active"><a href="/" th:text="#{home}"></a></li>
+                <li><a href="/students" th:text="#{students}"></a></li>
+                <li>
+                    <!-- Dropdown Trigger -->
+                    <a class='dropdown-trigger' href='#' data-target='dropdown1' style="padding: 10px;"><img th:src="${avatar_url}" class="imgavatar"></a>
+
+                    <!-- Dropdown Structure -->
+                    <ul id='dropdown1' class='dropdown-content'>
+                        <li><span th:text="${username}"></span></li>
+                        <li class="divider" tabindex="-1"></li>
+                        <li><a href="logout"><i class="material-icons">logout</i><span th:text="#{logout}"></span></a></li>
+                    </ul>
+                </li>
             </ul>
         </div>
     </nav>
@@ -27,7 +37,7 @@
         <div class="card-panel teal white-text" th:if="${success}" th:text="${success}"></div>
         <div class="card-panel red white-text" th:if="${error}" th:text="${error}"></div>
 
-        <h2>Lista de Alunos</h2>
+        <h2 th:text="#{students.list}"></h2>
 
         <div class="row">
             <div class="col s12 m6 l4" th:each="student : ${students}">
@@ -54,6 +64,20 @@
           <i class="large material-icons">add</i>
         </a>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var elems = document.querySelectorAll('.dropdown-trigger');
+            var instances = M.Dropdown.init(elems, {
+                constrainWidth: false,
+                coverTrigger: false
+            });
+        });
+
+        // Or with jQuery
+
+        $('.dropdown-trigger').dropdown();
+    </script>
 
 </body>
 </html>
