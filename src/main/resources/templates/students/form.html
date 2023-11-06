@@ -1,26 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <title>StudentManager</title>
-</head>
-
-<body class="grey lighten-2">
-    <nav>
-        <div class="nav-wrapper">
-            <a href="#" class="brand-logo">StudentManager</a>
-            <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li><a href="/">home</a></li>
-                <li class="active"><a href="/students">alunos</a></li>
-                <li><a href="/logout">logout</a></li>
-            </ul>
-        </div>
-    </nav>
+<head th:replace="~{_template :: head('Alunos')}"></head>
 
     <main class="container">
         <h2>Cadastrar Aluno</h2>
